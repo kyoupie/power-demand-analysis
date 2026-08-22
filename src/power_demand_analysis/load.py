@@ -8,7 +8,7 @@ RAW_DIR = Path(__file__).resolve().parents[2] / "data" / "raw"
 
 
 def load_power(year: int) -> pd.DataFrame:
-    """powerのRawデータを読み込んで整理"""
+    """powerのRawデータを読み込んで整理する。"""
     df = pd.read_csv(RAW_DIR / f"power_{year}.csv")
     df["datetime"] = df["DATE"] + " " + df["TIME"]
 
@@ -24,7 +24,7 @@ def load_power(year: int) -> pd.DataFrame:
 
 
 def load_weather(year: int) -> pd.DataFrame:
-    """weatherのRawデータを読み込んで整理"""
+    """weatherのRawデータを読み込んで整理する。"""
     df = pd.read_csv(RAW_DIR / f"weather_{year}.csv")
 
     df["time"] = pd.to_datetime(df["time"], format="%Y-%m-%dT%H:%M")
@@ -35,7 +35,7 @@ def load_weather(year: int) -> pd.DataFrame:
 
 
 def load_year(year: int) -> pd.DataFrame:
-    """powerの加工済みデータにweatherの加工済みデータを結合"""
+    """powerの加工済みデータにweatherの加工済みデータを結合する。"""
     power = load_power(year)
     weather = load_weather(year)
 
@@ -43,5 +43,5 @@ def load_year(year: int) -> pd.DataFrame:
 
 
 def load_all(years: tuple[int, ...] = (2023, 2024)) -> pd.DataFrame:
-    """年ごとの加工済みデータを縦に結合"""
+    """年ごとの加工済みデータを縦に結合する。"""
     return pd.concat([load_year(year) for year in years]).sort_index()
