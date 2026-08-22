@@ -174,3 +174,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+
+# データは fetch.py で再取得できるため追跡しない
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
